@@ -1,8 +1,11 @@
 package github.com.phyllipesa.rest.controllers;
 
-import github.com.phyllipesa.rest.controllers.request.converters.NumberConverter;
+import static github.com.phyllipesa.rest.controllers.request.converters.NumberConverter.convertToDouble;
+import static github.com.phyllipesa.rest.controllers.request.converters.NumberConverter.isNumeric;
+
 import github.com.phyllipesa.rest.math.SimpleMath;
 import github.com.phyllipesa.tratamentoDeExceptions.UnsupportedMathOperationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +27,11 @@ public class MathController {
     // http://localhost:8080/math/sum/3/5
     @GetMapping("/sum/{n1}/{n2}")
     public ResponseEntity<Double> sum(@PathVariable String n1, @PathVariable String n2) {
-        if (!NumberConverter.isNumeric(n1) || !NumberConverter.isNumeric(n2)) {
+        if (!isNumeric(n1) || !isNumeric(n2)) {
             throw new UnsupportedMathOperationException("Please provide numeric values!");
         }
 
-        Double result = math.sum(NumberConverter.convertToDouble(n1), NumberConverter.convertToDouble(n2));
+        Double result = math.sum(convertToDouble(n1), convertToDouble(n2));
         return ResponseEntity.ok(result);
     }
 }
