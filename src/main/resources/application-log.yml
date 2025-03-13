@@ -1,0 +1,19 @@
+spring:
+    application:
+        name: knowledge-repository
+
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/test?useTimezone=true&serverTimezone=UTC
+        username: root
+        password: rootadmin9753
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: false
+        open-in-view: false
+
+logging:
+    level:
+        # root: WARN
+        github.com.phyllipesa: DEBUG
